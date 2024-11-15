@@ -43,6 +43,13 @@ extern "C" {
 
 /* === Public macros definitions =============================================================== */
 
+/**
+ * @brief Tipo de datos para manejar pines GPIO.
+ *
+ * `gpio_t` es un puntero a una estructura que representa un GPIO específico. 
+ * Este tipo se utiliza para manipular y configurar pines GPIO a través de 
+ * las funciones correspondientes.
+ */
 typedef struct gpio_h * gpio_t;
 
 /* === Public data type declarations =========================================================== */
@@ -60,20 +67,38 @@ typedef struct gpio_h * gpio_t;
  */
 gpio_t GpioCreate(uint8_t port, uint8_t bit);
 
+/**
+ * @brief Configura la dirección de un pin GPIO.
+ *
+ * Esta función configura la dirección del pin GPIO especificado como entrada 
+ * o salida.
+ *
+ * @param gpio   El pin GPIO a configurar.
+ * @param output Establece en `true` para configurar como salida, `false` para entrada.
+ */
 void GpioSetDirection(gpio_t gpio, bool output);
 
+/**
+ * @brief Obtiene la dirección actual de un pin GPIO.
+ *
+ * Esta función devuelve la configuración de dirección del pin GPIO especificado, 
+ * indicando si está configurado como entrada o salida.
+ *
+ * @param gpio El pin GPIO a verificar.
+ * @return `true` si el pin está configurado como salida, `false` si está configurado como entrada.
+ */
 bool GpioGetDirection(gpio_t gpio);
 
-void GpioSetState(gpio_t gpio, bool state);
-
 /**
- * @brief Función para consultar el estado de un puerto digital
+ * @brief Establece el estado de un pin GPIO.
  *
- * @param gpio Puntero al objeto obtenido al llamar a la función GpioCreate
- * @return true El puerto digital esta encendido
- * @return false El puerto digital esta apagado
+ * Esta función establece el nivel lógico del pin GPIO especificado. 
+ * El pin debe estar configurado como salida antes de ajustar su estado.
+ *
+ * @param gpio  El pin GPIO a modificar.
+ * @param state Establece en `true` para poner el pin en alto, `false` para ponerlo en bajo.
  */
-bool GpioGetState(gpio_t gpio);
+void GpioSetState(gpio_t gpio, bool state);
 
 /* === End of documentation ==================================================================== */
 
